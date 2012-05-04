@@ -1,0 +1,14 @@
+{
+	"name": "node-paypalxo",
+	"version": "0.0.1",
+	"author": "Jeff Harrell <jeff@juxtadesign.com>",
+	"main": "index",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jeffharrell/node-paypalxo"
+	},
+	"engine": {
+		"node": ">=0.6"
+	},
+	"scripts": {}
+}
