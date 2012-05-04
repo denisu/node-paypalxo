@@ -23,6 +23,7 @@ An example using node-paypalxo with Express
 			.on('token', function (data) {
 				// Save the transaction details in the user's session
 				request.session.transaction = request.query;
+				
 				// Redirect to the EC login page
 				response.redirect(flow.getLoginURL(data.TOKEN));
 			})
@@ -34,7 +35,7 @@ An example using node-paypalxo with Express
 
 	app.get('/checkout/details', function(request, response) {
 		// Get the details of a transaction
-	    flow.getExpressCheckout(request.query)
+	    flow.getExpressCheckoutDetails(request.query)
 			.on('details', function (data) {
 				response.send(data);
 			})
