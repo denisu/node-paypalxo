@@ -1,63 +1,71 @@
 node-paypalxo
 =============
 
-A node module to help integrate with PayPal's Express Checkout web flow.
+Integrate with [PayPal's Express Checkout](https://paypal.com/checkout) payment flow.
 
 
 
-An example using node-paypalxo with Express
--------------------------------------------
-
-	var flow = require('node-paypalxo');
-
-
-	flow.user = PAYPAL_API_USER;
-	flow.pwd = PAYPAL_API_PWD;
-	flow.signature = PAYPAL_API_SIGNATURE;
-	flow.version = PAYPAL_API_VERSION;
-	flow.useSandbox = true;
+Installation
+------------
+`git clone git://github.com/jeffharrell/node-paypalxo.git`
 
 
-	app.get('/checkout', function (request, response) {
-		flow.setExpressCheckout(request.query)
-			.on('token', function (data) {
-				// Save the transaction details in the user's session
-				request.session.transaction = request.query;
-				
-				// Redirect to the EC login page
-				response.redirect(flow.getLoginURL(data.TOKEN));
-			})
-			.on('tokenError', function (e) {
-				response.send(e.L_LONGMESSAGE0, 500);
-			});
-	});
 
-
-	app.get('/checkout/details', function(request, response) {
-		// Get the details of a transaction
-	    flow.getExpressCheckoutDetails(request.query)
-			.on('details', function (data) {
-				response.send(data);
-			})
-			.on('detailsError', function (e) {
-				response.send(e.L_LONGMESSAGE0, 500);
-			});
-	});
-
-
-	app.get('/checkout/complete', function(request, response) {	
-		// Add additional order info needed to process the transaction
-		var data = request.session.transaction;
-		data.token = request.query.token;
-		data.payerid = request.query.PayerID;
-		data.paymentaction = 'Sale';
+Usage
+-----
+	var paypalxo = require('node-paypalxo');
 	
-		// Complete payment
-	    flow.doExpressCheckout(data)
-			.on('completed', function (data) {
-				response.send(data);
-			})
-			.on('completedError', function (e) {
-				response.send(e.L_LONGMESSAGE0, 500);
-			});
+	// Your PayPal API credentials
+	paypalxo.user = USER;
+	paypalxo.pwd = PWD;
+	paypalxo.signature = SIGNATURE;
+	paypalxo.version = VERSION;
+	
+	
+	// Sample data for a transaction
+	var params = {
+		amt: '1.00',
+		returnurl: 'http://example.com/success',
+		cancelurl: 'http://example.com/cancel'
+	};
+
+	// STEP 1: Get an Express Checkout token
+	paypalxo.ec.setExpressCheckout(params, function (err, data) {
+		if (err) {
+			// Handle the error
+		} else {
+			var token = data.TOKEN;
+		
+			// STEP 2: Send the user to this URL to login and checkout on PayPal
+			console.log(paypalxo.ec.getLoginURL(token));
+		}
 	});
+
+	// STEP 3: Get the details for the transaction once the user returns
+	paypalxo.ec.getExpressCheckoutDetails(params, function (err, data) {
+		if (err) {
+			// Handle the error
+		} else {
+			console.log(data);
+		}
+	});
+	
+	// STEP 4: Complete the transaction
+	paypalxo.ec.doExpressCheckoutPayment(params, function (err, data) {
+		if (err) {
+			// Handle the error
+		} else {
+			console.log(data);
+		}
+	});
+
+
+
+API
+---
+
+- `paypalxo.useSandbox`
+- `paypalxo.ec.setExpressCheckout(data, callback)`
+- `paypalxo.ec.getExpressCheckoutDetails(data, callback)`
+- `paypalxo.ec.doExpressCheckoutPayment(data, callback)`
+- `paypalxo.ec.getLoginURL(token)`
