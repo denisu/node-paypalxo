@@ -1,11 +1,15 @@
+/*jshint node:true */
+
+'use strict';
+
 
 var paypalxo = require('../');
 
 
-paypalxo.user = process.env.PP_USER;
-paypalxo.pwd = process.env.PP_PWD;
-paypalxo.signature = process.env.PP_SIGNATURE;
-paypalxo.version = process.env.PP_VERSION;
+paypalxo.user = process.env.API_USER;
+paypalxo.pwd = process.env.API_PWD;
+paypalxo.signature = process.env.API_SIGNATURE;
+paypalxo.version = process.env.API_VERSION;
 paypalxo.useSandbox = true;
 
 
