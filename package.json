@@ -1,6 +1,6 @@
 {
   "author": "Jeff Harrell <jeff@juxtadesign.com>",
-  "name": "PayPalXO",
+  "name": "paypalxo",
   "description": "API wrapper for PayPal's checkout flows",
   "version": "0.1.0",
   "homepage": "https://github.com/jeffharrell/node-paypalxo",
