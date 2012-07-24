@@ -29,12 +29,3 @@ paypalxo.ec.setExpressCheckout(params, function (err, data) {
 		console.log(paypalxo.ec.getLoginURL(token));
 	}
 });
-
-
-paypalxo.ec.doExpressCheckoutPayment(params, function (err, data) {
-	if (err) {
-		console.error(err);
-	} else {
-		console.log(data);
-	}
-});
