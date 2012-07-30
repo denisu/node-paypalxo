@@ -7,7 +7,7 @@ Integrate with [PayPal's Express Checkout](https://paypal.com/checkout) payment 
 
 Installation
 ------------
-`git clone git://github.com/jeffharrell/node-paypalxo.git`
+`npm install paypalxo`
 
 
 
