@@ -2,7 +2,7 @@
   "author": "Jeff Harrell <jeff@juxtadesign.com>",
   "name": "paypalxo",
   "description": "API wrapper for PayPal's checkout flows",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/jeffharrell/node-paypalxo",
   "repository": {
     "type": "git",
