@@ -1,7 +1,7 @@
 node-paypalxo
 =============
 
-Integrate with [PayPal's Express Checkout](https://paypal.com/checkout) payment flow. 
+Integrate with [PayPal's Express Checkout](https://paypal.com/checkout) payment flow.
 
 
 
@@ -35,7 +35,7 @@ var params = {
 paypalxo.ec.setExpressCheckout(params, function (err, data) {
 	if (!err) {
 		var token = data.TOKEN;
-	
+
 		// STEP 2: Send the user to the following URL to checkout on PayPal
 		console.log(paypalxo.ec.getLoginURL(token));
 	}
@@ -58,4 +58,5 @@ API
 - `paypalxo.ec.setExpressCheckout(params, callback)`
 - `paypalxo.ec.getExpressCheckoutDetails(params, callback)`
 - `paypalxo.ec.doExpressCheckoutPayment(params, callback)`
+- `paypalxo.ec.createRecurringPaymentsProfile(params, callback)`
 - `paypalxo.ec.getLoginURL(token)`
